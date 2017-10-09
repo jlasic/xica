@@ -8,12 +8,12 @@ import java.util.ArrayList;
  * Created by lasic on 12.06.2017..
  */
 
-public class Stavka {
+public class DishData {
     public String ime;
     public ArrayList<String> sastav;
     private String cijena;
 
-    public Stavka() {
+    public DishData() {
         sastav = new ArrayList<>();
     }
 

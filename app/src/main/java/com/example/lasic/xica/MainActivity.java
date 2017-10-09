@@ -16,8 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.lasic.xica.data.Jelovnik;
-import com.example.lasic.xica.data.Stavka;
+import com.example.lasic.xica.data.CanteenData;
+import com.example.lasic.xica.data.DishData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private Jelovnik currentJelovnik;
+    private CanteenData currentCanteenData;
 
     TextView mTextView1;
     TextView mTextView2;
@@ -90,11 +90,11 @@ public class MainActivity extends AppCompatActivity {
                             JSONArray json =response.getJSONArray("values");
 
 
-                            currentJelovnik = JSONparser.Parse(json);
+                            currentCanteenData = JSONparser.Parse(json);
 
                             String output = "";
 
-                            ArrayList<Stavka> meniStavke = currentJelovnik.getrMeni().getStavka();
+                            ArrayList<DishData> meniStavke = currentCanteenData.getrMenuData().getDishData();
 
                             MeniAdapter adapter = new MeniAdapter(mContext, R.layout.adapter_view_layout,meniStavke);
                             mListView.setAdapter(adapter);

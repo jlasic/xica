@@ -2,7 +2,7 @@ package com.example.lasic.xica;
 
 import android.util.Log;
 
-import com.example.lasic.xica.data.Jelovnik;
+import com.example.lasic.xica.data.CanteenData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,8 +14,8 @@ import org.json.JSONException;
 public class JSONparser {
     private static final String TAG = "JSONparser";
 
-    public static Jelovnik Parse(JSONArray jsonArray){
-        Jelovnik jelovnik = new Jelovnik();
+    public static CanteenData Parse(JSONArray jsonArray){
+        CanteenData canteenData = new CanteenData();
 
         for (int i=0; i<jsonArray.length(); i++){
             try {
@@ -26,21 +26,21 @@ public class JSONparser {
 
                     item = tmpArray.getString(0);
                     if (item.contains("-"))
-                        jelovnik.addRMeniItem(tmpArray);
+                        canteenData.addRMeniItem(tmpArray);
 //                    switch (item) {
 //                        case "R-MENI":
 //                        case "R-JELO PO IZBORU":
-//                            jelovnik.addRMeniItem(tmpArray);
+//                            canteenData.addRMeniItem(tmpArray);
 //                            break;
 //                        case "V-MENI":
 //                        case "V-JELO PO IZBORU":
-//                            jelovnik.addVMeniItem(tmpArray);
+//                            canteenData.addVMeniItem(tmpArray);
 //                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        return jelovnik;
+        return canteenData;
     }
 }

@@ -9,44 +9,44 @@ import java.util.ArrayList;
  * Created by lasic on 12.06.2017..
  */
 
-public class Meni {
-    private ArrayList<Stavka> stavka;
+public class MenuData {
+    private ArrayList<DishData> dishData;
 
-    public Meni() {
-        stavka = new ArrayList<>();
+    public MenuData() {
+        dishData = new ArrayList<>();
     }
     public void dodajStavku(JSONArray meni){
         try {
-            Stavka tmpStavka = new Stavka();
+            DishData tmpDishData = new DishData();
             int i;
 
             boolean containsJelo;
 
             containsJelo = meni.getString(0).contains("JELO");
             if (containsJelo == false) {
-                tmpStavka.setIme(meni.getString(1));
+                tmpDishData.setIme(meni.getString(1));
 
                 for (i = 2; i < meni.length() - 1; i++)
-                    tmpStavka.addSastav(meni.getString(i));
+                    tmpDishData.addSastav(meni.getString(i));
 
-                tmpStavka.setCijena(meni.getString(i));
+                tmpDishData.setCijena(meni.getString(i));
             }
             else if(containsJelo){
-                tmpStavka.setIme("JELO");
+                tmpDishData.setIme("JELO");
                 String imeCijena = meni.getString(1);
                 String[] temp = imeCijena.split(" ");
                 String cijena = temp[temp.length - 1];
-                tmpStavka.setCijena(cijena);
-                tmpStavka.addSastav(imeCijena.substring(0, imeCijena.length() - cijena.length()));
+                tmpDishData.setCijena(cijena);
+                tmpDishData.addSastav(imeCijena.substring(0, imeCijena.length() - cijena.length()));
             }
-            stavka.add(tmpStavka);
+            dishData.add(tmpDishData);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
 
-    public ArrayList<Stavka> getStavka() {
-        return stavka;
+    public ArrayList<DishData> getDishData() {
+        return dishData;
     }
 }
