@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.lasic.xica.data.CanteenData;
 import com.example.lasic.xica.data.DishData;
+import com.example.lasic.xica.helpers.JSONparser;
 
 import org.json.JSONArray;
 import org.json.JSONException;

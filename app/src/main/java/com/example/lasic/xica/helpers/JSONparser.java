@@ -1,4 +1,4 @@
-package com.example.lasic.xica;
+package com.example.lasic.xica.helpers;
 
 import android.util.Log;
 
