@@ -15,7 +15,6 @@ public class RequestManager {
     private static RequestManager mInstance;
     private RequestQueue mRequestQueue;
 
-
     private RequestManager(Context context){
         mContext = context;
         mRequestQueue = getRequestQueue();
