@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="8dp">
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MENI"
+        android:id="@+id/meniTV"
+        android:gravity="center_horizontal"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_orange_light"/>
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="item"
+        android:id="@+id/itemTV"
+        android:layout_below="@id/meniTV"
+        android:gravity="center_horizontal"
+        android:textSize="24sp"/>
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cijena"
+        android:id="@+id/cijenaTV"
+        android:layout_below="@id/itemTV"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+</RelativeLayout>
