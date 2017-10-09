@@ -2,9 +2,10 @@ package com.example.lasic.xica;
 
 import android.util.Log;
 
+import com.example.lasic.xica.data.Jelovnik;
+
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by lasic on 12.06.2017..

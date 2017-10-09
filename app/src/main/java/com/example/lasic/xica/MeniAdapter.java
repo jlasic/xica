@@ -10,8 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.lasic.xica.data.Stavka;
+
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by lasic on 13.06.2017..

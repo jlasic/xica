@@ -1,9 +1,6 @@
-package com.example.lasic.xica;
+package com.example.lasic.xica.data;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by lasic on 12.06.2017..
