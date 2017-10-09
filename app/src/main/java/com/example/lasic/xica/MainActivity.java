@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.lasic.xica.data.CanteenData;
 import com.example.lasic.xica.data.DishData;
 import com.example.lasic.xica.helpers.JSONparser;
+import com.example.lasic.xica.singletons.RequestManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -114,6 +115,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         // Add the request to the RequestQueue.
-        mQueue.add(jsObjRequest);
+        RequestManager.getInstance(this).addToRequestQueue(jsObjRequest);
     }
 }
