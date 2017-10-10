@@ -30,6 +30,7 @@ public class MainPresenter {
     private Listener listener;
     private Context mContext;
     private String currentReqEndpoint;
+    private CanteenData currentCanteenData;
 
     public MainPresenter(Context context){
         mContext = context;
@@ -50,8 +51,12 @@ public class MainPresenter {
         currentReqEndpoint = endpoint;
 
         JSONObject data = DataManager.getInstance(mContext).getCanteenData(endpoint);
+        CanteenData canteenData = JSONparser.parse(data);
 
-        if (JSONparser.parse(data) == null){
+        if (canteenData != null){
+            notifyDataChanged(canteenData);
+        }
+        else {
             JsonObjectRequest jsObjRequest = new JsonObjectRequest(
                     Request.Method.GET,
                     Constants.BASE_URL.concat(endpoint),
@@ -60,19 +65,26 @@ public class MainPresenter {
                         @Override
                         public void onResponse(JSONObject response) {
                             CanteenData canteenData = JSONparser.parse(response);
-                            if (listener != null)
-                                listener.onResponse(canteenData);
+
+                            if (canteenData != null) {
+                                DataManager.getInstance(mContext).makeCache(endpoint, response);
+                                notifyDataChanged(canteenData);
+                            }
                         }
                     }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-                        }
-                    });
-            // Add the request to the RequestQueue.
+                }
+            });
             RequestManager.getInstance(mContext).addToRequestQueue(jsObjRequest);
         }
     }
 
+    private void notifyDataChanged(CanteenData canteenData){
+        currentCanteenData = canteenData;
+        if (listener != null)
+            listener.onResponse(canteenData);
+    }
 
 }
