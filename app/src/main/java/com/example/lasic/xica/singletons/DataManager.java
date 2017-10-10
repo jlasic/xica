@@ -2,6 +2,8 @@ package com.example.lasic.xica.singletons;
 
 import android.content.Context;
 
+import org.json.JSONObject;
+
 /**
  * Created by lasic on 09.10.2017..
  */
@@ -19,5 +21,9 @@ public class DataManager {
             mInstance = new DataManager(context.getApplicationContext());
         }
         return mInstance;
+    }
+
+    public JSONObject getCanteenData(String canteenName){
+        return null;
     }
 }

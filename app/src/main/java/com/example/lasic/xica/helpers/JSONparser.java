@@ -6,6 +6,7 @@ import com.example.lasic.xica.data.CanteenData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by lasic on 12.06.2017..
@@ -14,7 +15,17 @@ import org.json.JSONException;
 public class JSONparser {
     private static final String TAG = "JSONparser";
 
-    public static CanteenData Parse(JSONArray jsonArray){
+    public static CanteenData parse(JSONObject jsonObject){
+        if (jsonObject == null)
+            return null;
+
+        JSONArray jsonArray;
+        try {
+            jsonArray = jsonObject.getJSONArray("values");
+        }catch (Exception e){
+            return null;
+        }
+
         CanteenData canteenData = new CanteenData();
 
         for (int i=0; i<jsonArray.length(); i++){

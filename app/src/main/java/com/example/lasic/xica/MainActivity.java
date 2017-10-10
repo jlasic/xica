@@ -44,77 +44,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate: STARTED");
 
         mContext = this;
         mListView = (ListView) findViewById(R.id.meniList);
+
+        final MainPresenter presenter =  new MainPresenter(this, Constants.CanteenName.FESB);
+        presenter.setListener(new MainPresenter.Listener() {
+            @Override
+            public void onResponse(CanteenData currentCanteenData) {
+                String output = "";
+
+                ArrayList<DishData> meniStavke = currentCanteenData.getrMenuData().getDishData();
+
+                MeniAdapter adapter = new MeniAdapter(mContext, R.layout.adapter_view_layout,meniStavke);
+                mListView.setAdapter(adapter);
+            }
+        });
 
         Button kampus = (Button) findViewById(R.id.kampus);
         kampus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = "http://filestest.dbtouch.com/scst/menu/api/?place=kampus";
-                request();
+                presenter.getCanteenData(Constants.CanteenName.KAMPUS);
             }
         });
         Button fesb = (Button) findViewById(R.id.fesb);
         fesb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = "http://filestest.dbtouch.com/scst/menu/api/?place=fesb_vrh";
-                request();
+                presenter.getCanteenData(Constants.CanteenName.FESB);
             }
         });
         Button efst = (Button) findViewById(R.id.efst);
         efst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = "http://filestest.dbtouch.com/scst/menu/api/?place=efst";
-                request();
+                presenter.getCanteenData(Constants.CanteenName.EKONOMIJA);
             }
         });
-
-        // Instantiate the RequestQueue.
-
-        mQueue = Volley.newRequestQueue(this);
-
-
-
-    }
-
-    private void request(){
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray json =response.getJSONArray("values");
-
-
-                            currentCanteenData = JSONparser.Parse(json);
-
-                            String output = "";
-
-                            ArrayList<DishData> meniStavke = currentCanteenData.getrMenuData().getDishData();
-
-                            MeniAdapter adapter = new MeniAdapter(mContext, R.layout.adapter_view_layout,meniStavke);
-                            mListView.setAdapter(adapter);
-                        }
-                        catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        Toast.makeText(getApplicationContext(), "Greska!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-        // Add the request to the RequestQueue.
-        RequestManager.getInstance(this).addToRequestQueue(jsObjRequest);
     }
 }
