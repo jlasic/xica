@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import com.example.lasic.xica.data.CanteenData;
+import com.example.lasic.xica.helpers.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

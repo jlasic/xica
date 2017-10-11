@@ -2,7 +2,6 @@ package com.example.lasic.xica.helpers;
 
 import android.support.annotation.NonNull;
 
-import com.example.lasic.xica.Constants;
 import com.example.lasic.xica.data.CanteenData;
 import com.example.lasic.xica.data.MealData;
 import com.example.lasic.xica.data.MenuData;

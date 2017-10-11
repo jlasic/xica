@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.lasic.xica.data.CanteenData;
+import com.example.lasic.xica.helpers.Constants;
 import com.example.lasic.xica.helpers.Utils;
 import com.example.lasic.xica.singletons.DataManager;
 import com.example.lasic.xica.singletons.RequestManager;

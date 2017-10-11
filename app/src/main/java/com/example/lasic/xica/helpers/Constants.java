@@ -1,4 +1,4 @@
-package com.example.lasic.xica;
+package com.example.lasic.xica.helpers;
 
 /**
  * Created by lasic on 10.10.2017..
