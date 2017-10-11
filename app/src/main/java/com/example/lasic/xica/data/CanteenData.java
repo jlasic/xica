@@ -7,6 +7,13 @@ import org.json.JSONArray;
  */
 
 public class CanteenData {
+
+    public static final String NAME = "CANTEEN_NAME";
+    public static final String DATE_FROM = "CANTEEN_DATE_FROM";
+    public static final String DATE_TO = "CANTEEN_DATE_TO";
+    public static final String MENU_DINNER = "CANTEEN_MENU_DINNER";
+    public static final String MENU_LUNCH = "CANTEEN_MENU_LUNCH";
+
     private MenuData rMenuData;
     private MenuData vMenuData;
     public boolean hasDinner = false;

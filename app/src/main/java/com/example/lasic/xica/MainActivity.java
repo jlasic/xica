@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.example.lasic.xica.data.CanteenData;
-import com.example.lasic.xica.data.DishData;
+import com.example.lasic.xica.data.MealData;
 
 import java.util.ArrayList;
 
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(CanteenData currentCanteenData) {
                 String output = "";
 
-                ArrayList<DishData> meniStavke = currentCanteenData.getrMenuData().getDishData();
+                ArrayList<MealData> meniStavke = currentCanteenData.getrMenuData().getMealData();
 
                 MeniAdapter adapter = new MeniAdapter(mContext, R.layout.adapter_view_layout,meniStavke);
                 mListView.setAdapter(adapter);

@@ -10,43 +10,49 @@ import java.util.ArrayList;
  */
 
 public class MenuData {
-    private ArrayList<DishData> dishData;
+
+    public static final String NAME = "MENU_NAME";
+    public static final String MEAL_ARRAY = "MENU_MEAL_ARRAY";
+    public static final String START_TIME = "MENU_START_TIME";
+    public static final String END_TIME = "MENU_END_TIME";
+
+    private ArrayList<MealData> mealData;
 
     public MenuData() {
-        dishData = new ArrayList<>();
+        mealData = new ArrayList<>();
     }
     public void dodajStavku(JSONArray meni){
         try {
-            DishData tmpDishData = new DishData();
+            MealData tmpMealData = new MealData();
             int i;
 
             boolean containsJelo;
 
             containsJelo = meni.getString(0).contains("JELO");
             if (containsJelo == false) {
-                tmpDishData.setIme(meni.getString(1));
+                tmpMealData.setIme(meni.getString(1));
 
                 for (i = 2; i < meni.length() - 1; i++)
-                    tmpDishData.addSastav(meni.getString(i));
+                    tmpMealData.addSastav(meni.getString(i));
 
-                tmpDishData.setCijena(meni.getString(i));
+                tmpMealData.setCijena(meni.getString(i));
             }
             else if(containsJelo){
-                tmpDishData.setIme("JELO");
+                tmpMealData.setIme("JELO");
                 String imeCijena = meni.getString(1);
                 String[] temp = imeCijena.split(" ");
                 String cijena = temp[temp.length - 1];
-                tmpDishData.setCijena(cijena);
-                tmpDishData.addSastav(imeCijena.substring(0, imeCijena.length() - cijena.length()));
+                tmpMealData.setCijena(cijena);
+                tmpMealData.addSastav(imeCijena.substring(0, imeCijena.length() - cijena.length()));
             }
-            dishData.add(tmpDishData);
+            mealData.add(tmpMealData);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
 
-    public ArrayList<DishData> getDishData() {
-        return dishData;
+    public ArrayList<MealData> getMealData() {
+        return mealData;
     }
 }

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.lasic.xica.data.DishData;
+import com.example.lasic.xica.data.MealData;
 
 import java.util.ArrayList;
 
@@ -18,12 +18,12 @@ import java.util.ArrayList;
  * Created by lasic on 13.06.2017..
  */
 
-public class MeniAdapter extends ArrayAdapter<DishData> {
+public class MeniAdapter extends ArrayAdapter<MealData> {
     private static final String TAG = "MeniAdapter";
     private Context mContext;
     private int mResource;
 
-    public MeniAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<DishData> objects) {
+    public MeniAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<MealData> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;

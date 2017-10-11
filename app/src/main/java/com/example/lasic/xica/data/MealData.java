@@ -8,12 +8,16 @@ import java.util.ArrayList;
  * Created by lasic on 12.06.2017..
  */
 
-public class DishData {
+public class MealData {
+    public static final String NAME = "MEAL_NAME";
+    public static final String DISH_ARRAY = "MEAL_DISH_ARRAY";
+    public static final String PRICE = "MEAL_PRICE";
+
     public String ime;
     public ArrayList<String> sastav;
     private String cijena;
 
-    public DishData() {
+    public MealData() {
         sastav = new ArrayList<>();
     }
 

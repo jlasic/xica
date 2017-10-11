@@ -25,6 +25,7 @@ public class JSONparser {
         }catch (Exception e){
             return null;
         }
+        Utils.fixResponse(jsonObject);
 
         CanteenData canteenData = new CanteenData();
 

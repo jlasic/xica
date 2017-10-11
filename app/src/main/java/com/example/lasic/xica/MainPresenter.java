@@ -8,7 +8,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.lasic.xica.data.CanteenData;
 import com.example.lasic.xica.helpers.JSONparser;
-import com.example.lasic.xica.helpers.RequestHelper;
+import com.example.lasic.xica.helpers.Utils;
 import com.example.lasic.xica.singletons.DataManager;
 import com.example.lasic.xica.singletons.RequestManager;
 
@@ -43,7 +43,7 @@ public class MainPresenter {
 
 
     public void getCanteenData(final String canteenName){
-        final String endpoint = RequestHelper.getEndpoint(canteenName);
+        final String endpoint = Utils.getEndpoint(canteenName);
 
         if (endpoint == null)
             return;
