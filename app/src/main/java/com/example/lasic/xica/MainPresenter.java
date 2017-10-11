@@ -1,7 +1,6 @@
 package com.example.lasic.xica;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -51,8 +50,7 @@ public class MainPresenter {
 
         currentReqEndpoint = endpoint;
 
-//        JSONObject data = DataManager.getInstance(mContext).getCanteenData(endpoint);
-        CanteenData canteenData = null;
+        CanteenData canteenData = DataManager.getInstance(mContext).getCanteenData(endpoint);
 
         if (canteenData != null){
             notifyDataChanged(canteenData);
@@ -65,14 +63,17 @@ public class MainPresenter {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-
                             JSONObject fixedJSON = Utils.fixResponse(response);
+
                             if (fixedJSON != null){
-                                Log.d("TEST123", "onResponse: " + fixedJSON.toString());
-                                Gson gson = new Gson();
-                                CanteenData data = gson.fromJson(fixedJSON.toString(), CanteenData.class);
-                                notifyDataChanged(data);
+                                CanteenData canteenData = new Gson().fromJson(fixedJSON.toString(), CanteenData.class);
+                                if (canteenData != null && canteenData.hasValidInfo()){
+                                    DataManager.getInstance(mContext).makeCache(endpoint, fixedJSON);
+                                    notifyDataChanged(canteenData);
+                                    return;
+                                }
                             }
+                            //TODO: error
                         }
                     }, new Response.ErrorListener() {
                 @Override

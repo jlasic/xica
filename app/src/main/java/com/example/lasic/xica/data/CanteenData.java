@@ -1,5 +1,6 @@
 package com.example.lasic.xica.data;
 
+import com.example.lasic.xica.helpers.Utils;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
@@ -21,10 +22,10 @@ public class CanteenData {
     public String name;
 
     @SerializedName(DATE_START)
-    public String dateStart;
+    private String dateStart;
 
     @SerializedName(DATE_END)
-    public String dateEnd;
+    private String dateEnd;
 
     @SerializedName(MENU_LUNCH)
     private MenuData lunchMenu;
@@ -37,5 +38,16 @@ public class CanteenData {
     }
     public MenuData getDinnerMenu() {
         return dinnerMenu;
+    }
+
+    public int getSize(){
+        int lunchSize = lunchMenu != null ? lunchMenu.getSize() : 0;
+        int dinnerSize = dinnerMenu != null ? dinnerMenu.getSize() : 0;
+        return dinnerSize + lunchSize;
+    }
+
+    public boolean hasValidInfo(){
+        String s = Utils.getFormattedDate();
+        return s.equals(dateEnd);
     }
 }

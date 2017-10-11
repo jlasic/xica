@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.lasic.xica.data.CanteenData;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -34,17 +35,17 @@ public class DataManager {
         return mInstance;
     }
 
-    public JSONObject getCanteenData(String endpoint){
-        String stringResponse = preferences.getString(endpoint, null);
-        if (stringResponse != null){
-            try {
-                return new JSONObject(stringResponse);
-            }catch (Exception e){
-                preferences.edit().putString(endpoint, null).apply();
-                return null;
-            }
+    public CanteenData getCanteenData(String endpoint){
+        String stringResponse = preferences.getString(endpoint, "");
+
+        CanteenData canteenData = new Gson().fromJson(stringResponse, CanteenData.class);
+
+        if (canteenData != null && canteenData.hasValidInfo())
+            return canteenData;
+        else {
+            preferences.edit().putString(endpoint, null).apply();
+            return null;
         }
-        return null;
     }
 
     public void makeCache(String endpoint, JSONObject jsonObject){

@@ -27,4 +27,16 @@ public class MealData {
     public ArrayList<String> getDishes() {
         return dishes;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public int getSize(){
+        return dishes != null ? dishes.size() : 0;
+    }
 }

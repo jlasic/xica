@@ -33,4 +33,8 @@ public class MenuData {
     public ArrayList<MealData> getMeals() {
         return meals;
     }
+
+    public int getSize(){
+        return meals != null ? meals.size() : 0;
+    }
 }

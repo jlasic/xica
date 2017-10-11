@@ -1,66 +1,59 @@
 package com.example.lasic.xica;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
-import com.android.volley.RequestQueue;
 import com.example.lasic.xica.data.CanteenData;
-import com.example.lasic.xica.data.MealData;
 
-import java.util.ArrayList;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    TextView mTextView1;
-    TextView mTextView2;
-    private RequestQueue mQueue;
-    private String url;
-    private Context mContext;
-    private ListView mListView;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+
+    private MainPresenter presenter;
+    private MainAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        mContext = this;
-        mListView = (ListView) findViewById(R.id.meniList);
 
-        final MainPresenter presenter =  new MainPresenter(this, null);
+        adapter = new MainAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        presenter =  new MainPresenter(this, null);
         presenter.setListener(new MainPresenter.Listener() {
             @Override
             public void onResponse(CanteenData currentCanteenData) {
-                Log.d(TAG, "onResponse: " + "TEST");
+                adapter.setData(currentCanteenData.getLunchMenu());
             }
         });
+    }
 
-        Button kampus = (Button) findViewById(R.id.kampus);
-        kampus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @OnClick({R.id.kampus, R.id.fesb, R.id.efst})
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.kampus:
                 presenter.getCanteenData(Constants.CanteenName.KAMPUS);
-            }
-        });
-        Button fesb = (Button) findViewById(R.id.fesb);
-        fesb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.fesb:
                 presenter.getCanteenData(Constants.CanteenName.FESB);
-            }
-        });
-        Button efst = (Button) findViewById(R.id.efst);
-        efst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.efst:
                 presenter.getCanteenData(Constants.CanteenName.EKONOMIJA);
-            }
-        });
+                break;
+        }
     }
 }

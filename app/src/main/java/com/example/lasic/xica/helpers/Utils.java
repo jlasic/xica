@@ -10,6 +10,10 @@ import com.example.lasic.xica.data.MenuData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * Created by lasic on 10.10.2017..
  */
@@ -31,6 +35,10 @@ public final class Utils {
                 return Constants.CanteenName.NAME_ARRAY[i];
 
         return null;
+    }
+
+    public static String getFormattedDate(){
+        return new SimpleDateFormat("dd/MM/yyyy", Locale.GERMANY).format(new Date());
     }
 
     public static JSONObject fixResponse(JSONObject response){
