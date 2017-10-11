@@ -3,6 +3,7 @@ package com.example.lasic.xica;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -32,16 +33,11 @@ public class MainActivity extends AppCompatActivity {
         mContext = this;
         mListView = (ListView) findViewById(R.id.meniList);
 
-        final MainPresenter presenter =  new MainPresenter(this, Constants.CanteenName.FESB);
+        final MainPresenter presenter =  new MainPresenter(this, null);
         presenter.setListener(new MainPresenter.Listener() {
             @Override
             public void onResponse(CanteenData currentCanteenData) {
-                String output = "";
-
-                ArrayList<MealData> meniStavke = currentCanteenData.getrMenuData().getMealData();
-
-                MeniAdapter adapter = new MeniAdapter(mContext, R.layout.adapter_view_layout,meniStavke);
-                mListView.setAdapter(adapter);
+                Log.d(TAG, "onResponse: " + "TEST");
             }
         });
 

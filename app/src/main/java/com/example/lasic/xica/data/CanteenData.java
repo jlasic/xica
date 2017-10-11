@@ -1,6 +1,9 @@
 package com.example.lasic.xica.data;
 
-import org.json.JSONArray;
+import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
+
+import org.json.JSONObject;
 
 /**
  * Created by lasic on 12.06.2017..
@@ -9,37 +12,30 @@ import org.json.JSONArray;
 public class CanteenData {
 
     public static final String NAME = "CANTEEN_NAME";
-    public static final String DATE_FROM = "CANTEEN_DATE_FROM";
-    public static final String DATE_TO = "CANTEEN_DATE_TO";
+    public static final String DATE_START = "CANTEEN_DATE_START";
+    public static final String DATE_END = "CANTEEN_DATE_END";
     public static final String MENU_DINNER = "CANTEEN_MENU_DINNER";
     public static final String MENU_LUNCH = "CANTEEN_MENU_LUNCH";
 
-    private MenuData rMenuData;
-    private MenuData vMenuData;
-    public boolean hasDinner = false;
+    @SerializedName(NAME)
+    public String name;
 
-    public CanteenData() {
-        rMenuData = new MenuData();
-    }
+    @SerializedName(DATE_START)
+    public String dateStart;
 
-    public void addRMeniItem(JSONArray meni){
-        rMenuData.dodajStavku(meni);
-    }
-    public void addVMeniItem(JSONArray meni){
-        if (meni.length() > 2) {
-            if (!hasDinner) {
-                vMenuData = new MenuData();
-                hasDinner = true;
-            }
-            vMenuData.dodajStavku(meni);
-        }
-    }
+    @SerializedName(DATE_END)
+    public String dateEnd;
 
-    public MenuData getrMenuData() {
-        return rMenuData;
-    }
+    @SerializedName(MENU_LUNCH)
+    private MenuData lunchMenu;
 
-    public MenuData getvMenuData() {
-        return vMenuData;
+    @SerializedName(MENU_DINNER)
+    private MenuData dinnerMenu;
+
+    public MenuData getLunchMenu() {
+        return lunchMenu;
+    }
+    public MenuData getDinnerMenu() {
+        return dinnerMenu;
     }
 }

@@ -1,7 +1,6 @@
 package com.example.lasic.xica.helpers;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.lasic.xica.Constants;
 import com.example.lasic.xica.data.CanteenData;
@@ -65,8 +64,8 @@ public final class Utils {
                         String date1 = row.getString(3);
                         String date2 = row.getString(4);
                         fixedJSON.put(CanteenData.NAME, row.getString(2));
-                        fixedJSON.put(CanteenData.DATE_FROM, date1);
-                        fixedJSON.put(CanteenData.DATE_TO, date2);
+                        fixedJSON.put(CanteenData.DATE_START, date1);
+                        fixedJSON.put(CanteenData.DATE_END, date2);
                     }
                 } catch (Exception e) {}
 
@@ -112,7 +111,7 @@ public final class Utils {
                                         parsedDishes.put(dish);
                                 }
 
-                                parsedMeal.put(MealData.DISH_ARRAY, parsedDishes.toString());
+                                parsedMeal.put(MealData.DISH_ARRAY, parsedDishes);
 
                                 //price
                                 parsedMeal.put(MealData.PRICE, row.getString(7));
@@ -136,7 +135,7 @@ public final class Utils {
                                 //sastav
                                 JSONArray parsedDishes = new JSONArray();
                                 parsedDishes.put(dish);
-                                parsedMeal.put(MealData.DISH_ARRAY, parsedDishes.toString());
+                                parsedMeal.put(MealData.DISH_ARRAY, parsedDishes);
 
                                 //price
                                 parsedMeal.put(MealData.PRICE, price);

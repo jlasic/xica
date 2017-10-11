@@ -2,6 +2,8 @@ package com.example.lasic.xica.data;
 
 import android.text.TextUtils;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 /**
@@ -13,38 +15,16 @@ public class MealData {
     public static final String DISH_ARRAY = "MEAL_DISH_ARRAY";
     public static final String PRICE = "MEAL_PRICE";
 
-    public String ime;
-    public ArrayList<String> sastav;
-    private String cijena;
+    @SerializedName(NAME)
+    public String name;
 
-    public MealData() {
-        sastav = new ArrayList<>();
-    }
+    @SerializedName(PRICE)
+    public String price;
 
-    public String getIme() {
-        return ime;
-    }
+    @SerializedName(DISH_ARRAY)
+    public ArrayList<String> dishes;
 
-    public void setIme(String ime) {
-        this.ime = ime;
-    }
-
-    public void addSastav(String naziv){
-        sastav.add(naziv);
-    }
-
-    public String getCijena() {
-        return cijena;
-    }
-
-    public void setCijena(String cijena) {
-        this.cijena = cijena;
-    }
-
-    public ArrayList<String> getSastav() {
-        return sastav;
-    }
-    public String getOutputSastav(){
-        return TextUtils.join("\n", sastav);
+    public ArrayList<String> getDishes() {
+        return dishes;
     }
 }

@@ -32,20 +32,20 @@ public class MeniAdapter extends ArrayAdapter<MealData> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        String nazivMeni = getItem(position).getIme();
-        String sastav = getItem(position).getOutputSastav();
-        String cijena = getItem(position).getCijena();
+//        String nazivMeni = getItem(position).getIme();
+//        String sastav = getItem(position).getOutputSastav();
+//        String cijena = getItem(position).getCijena();
 
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        convertView = inflater.inflate(mResource, parent, false);
-
-        TextView tvNaziv = (TextView) convertView.findViewById(R.id.meniTV);
-        TextView tvItem = (TextView) convertView.findViewById(R.id.itemTV);
-        TextView tvCijena = (TextView) convertView.findViewById(R.id.cijenaTV);
-
-        tvNaziv.setText(nazivMeni);
-        tvItem.setText(sastav);
-        tvCijena.setText(cijena);
+//        LayoutInflater inflater = LayoutInflater.from(mContext);
+//        convertView = inflater.inflate(mResource, parent, false);
+//
+//        TextView tvNaziv = (TextView) convertView.findViewById(R.id.meniTV);
+//        TextView tvItem = (TextView) convertView.findViewById(R.id.itemTV);
+//        TextView tvCijena = (TextView) convertView.findViewById(R.id.cijenaTV);
+//
+//        tvNaziv.setText(nazivMeni);
+//        tvItem.setText(sastav);
+//        tvCijena.setText(cijena);
         return convertView;
     }
 }

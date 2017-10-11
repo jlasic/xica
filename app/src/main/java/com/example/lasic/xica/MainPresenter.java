@@ -1,16 +1,17 @@
 package com.example.lasic.xica;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.lasic.xica.data.CanteenData;
-import com.example.lasic.xica.helpers.JSONparser;
 import com.example.lasic.xica.helpers.Utils;
 import com.example.lasic.xica.singletons.DataManager;
 import com.example.lasic.xica.singletons.RequestManager;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -50,8 +51,8 @@ public class MainPresenter {
 
         currentReqEndpoint = endpoint;
 
-        JSONObject data = DataManager.getInstance(mContext).getCanteenData(endpoint);
-        CanteenData canteenData = JSONparser.parse(data);
+//        JSONObject data = DataManager.getInstance(mContext).getCanteenData(endpoint);
+        CanteenData canteenData = null;
 
         if (canteenData != null){
             notifyDataChanged(canteenData);
@@ -64,11 +65,13 @@ public class MainPresenter {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            CanteenData canteenData = JSONparser.parse(response);
 
-                            if (canteenData != null) {
-                                DataManager.getInstance(mContext).makeCache(endpoint, response);
-                                notifyDataChanged(canteenData);
+                            JSONObject fixedJSON = Utils.fixResponse(response);
+                            if (fixedJSON != null){
+                                Log.d("TEST123", "onResponse: " + fixedJSON.toString());
+                                Gson gson = new Gson();
+                                CanteenData data = gson.fromJson(fixedJSON.toString(), CanteenData.class);
+                                notifyDataChanged(data);
                             }
                         }
                     }, new Response.ErrorListener() {

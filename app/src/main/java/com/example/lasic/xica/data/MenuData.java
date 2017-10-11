@@ -1,5 +1,7 @@
 package com.example.lasic.xica.data;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -16,43 +18,19 @@ public class MenuData {
     public static final String START_TIME = "MENU_START_TIME";
     public static final String END_TIME = "MENU_END_TIME";
 
-    private ArrayList<MealData> mealData;
+    @SerializedName(NAME)
+    public String name;
 
-    public MenuData() {
-        mealData = new ArrayList<>();
-    }
-    public void dodajStavku(JSONArray meni){
-        try {
-            MealData tmpMealData = new MealData();
-            int i;
+    @SerializedName(START_TIME)
+    public String startTime;
 
-            boolean containsJelo;
+    @SerializedName(END_TIME)
+    public String endTime;
 
-            containsJelo = meni.getString(0).contains("JELO");
-            if (containsJelo == false) {
-                tmpMealData.setIme(meni.getString(1));
+    @SerializedName(MEAL_ARRAY)
+    private ArrayList<MealData> meals;
 
-                for (i = 2; i < meni.length() - 1; i++)
-                    tmpMealData.addSastav(meni.getString(i));
-
-                tmpMealData.setCijena(meni.getString(i));
-            }
-            else if(containsJelo){
-                tmpMealData.setIme("JELO");
-                String imeCijena = meni.getString(1);
-                String[] temp = imeCijena.split(" ");
-                String cijena = temp[temp.length - 1];
-                tmpMealData.setCijena(cijena);
-                tmpMealData.addSastav(imeCijena.substring(0, imeCijena.length() - cijena.length()));
-            }
-            mealData.add(tmpMealData);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public ArrayList<MealData> getMealData() {
-        return mealData;
+    public ArrayList<MealData> getMeals() {
+        return meals;
     }
 }
