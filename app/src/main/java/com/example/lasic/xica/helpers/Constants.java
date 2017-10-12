@@ -11,24 +11,40 @@ public final class Constants {
     public static final class Endpoint {
         public static final String FESB = "fesb_vrh";
         public static final String KAMPUS = "kampus";
-        public static final String EKONOMIJA = "efst";
+        public static final String EFST = "efst";
+        public static final String FGAG = "fgag";
+        public static final String MEDICINA = "medicina";
+        public static final String INDEKS = "indeks";
+        public static final String HOSTEL = "hostel";
 
         public static final String [] ENDPOINT_ARRAY = {
                 FESB,
                 KAMPUS,
-                EKONOMIJA
+                EFST,
+                FGAG,
+                MEDICINA,
+                INDEKS,
+                HOSTEL
         };
     }
 
     public static final class CanteenName {
         public static final String FESB = "FESB";
         public static final String KAMPUS = "KAMPUS";
-        public static final String EKONOMIJA = "EFST";
+        public static final String EFST = "EKONOMIJA";
+        public static final String FGAG = "GRAĐEVINA";
+        public static final String MEDICINA = "MEDICINA";
+        public static final String INDEKS = "INDEKS";
+        public static final String HOSTEL = "HOSTEL";
 
         public static final String [] NAME_ARRAY = {
                 FESB,
                 KAMPUS,
-                EKONOMIJA
+                EFST,
+                FGAG,
+                MEDICINA,
+                INDEKS,
+                HOSTEL
         };
     }
 }
