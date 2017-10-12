@@ -40,12 +40,10 @@ public class DataManager {
 
         CanteenData canteenData = new Gson().fromJson(stringResponse, CanteenData.class);
 
-        if (canteenData != null && canteenData.hasValidInfo())
-            return canteenData;
-        else {
+        if (canteenData == null)
             preferences.edit().putString(endpoint, null).apply();
-            return null;
-        }
+
+        return canteenData;
     }
 
     public void makeCache(String endpoint, JSONObject jsonObject){

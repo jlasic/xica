@@ -2,6 +2,7 @@ package com.example.lasic.xica;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class MainAdapter extends RecyclerView.Adapter {
 
         String nazivMeni = data.getMeals().get(position).getName();
         String cijena = data.getMeals().get(position).getPrice();
-        String sastav = data.getMeals().get(position).getDishes().get(0);
+        String sastav = TextUtils.join("\n", data.getMeals().get(position).getDishes());
 
 
         viewHolder.tvNaziv.setText(nazivMeni);

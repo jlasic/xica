@@ -20,15 +20,8 @@ import org.json.JSONObject;
  */
 
 public class MainPresenter {
-    public interface Listener{
-        void onResponse(CanteenData canteenData);
-    }
 
-    public void setListener(Listener listener) {
-        this.listener = listener;
-    }
-
-    private Listener listener;
+    private MainPresenterListener listener;
     private Context mContext;
     private String currentReqEndpoint;
     private CanteenData currentCanteenData;
@@ -42,6 +35,9 @@ public class MainPresenter {
         getCanteenData(canteenName);
     }
 
+    public void setListener(MainPresenterListener listener) {
+        this.listener = listener;
+    }
 
     public void getCanteenData(final String canteenName){
         final String endpoint = Utils.getEndpoint(canteenName);
@@ -64,24 +60,23 @@ public class MainPresenter {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            CanteenData canteenData = null;
                             JSONObject fixedJSON = Utils.fixResponse(response);
 
                             if (fixedJSON != null){
-                                CanteenData canteenData = new Gson().fromJson(fixedJSON.toString(), CanteenData.class);
-                                if (canteenData != null && canteenData.hasValidInfo()){
+                                canteenData = new Gson().fromJson(fixedJSON.toString(), CanteenData.class);
+                                if (canteenData != null)
                                     DataManager.getInstance(mContext).makeCache(endpoint, fixedJSON);
-                                    notifyDataChanged(canteenData);
-                                    return;
-                                }
                             }
-                            //TODO: error
+                            notifyDataChanged(canteenData);
                         }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            });
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //TODO: error response
+                        }
+                    });
             RequestManager.getInstance(mContext).addToRequestQueue(jsObjRequest);
         }
     }
