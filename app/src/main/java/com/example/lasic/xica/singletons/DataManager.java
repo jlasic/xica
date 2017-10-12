@@ -93,10 +93,13 @@ public class DataManager {
 
         CanteenData canteenData = new Gson().fromJson(stringResponse, CanteenData.class);
 
-        if (canteenData == null)
+        if (canteenData != null && canteenData.hasValidInfo()) {
+            return canteenData;
+        }
+        else {
             preferences.edit().putString(endpoint, null).apply();
-
-        return canteenData;
+            return null;
+        }
     }
 
     private void makeCache(String endpoint, JSONObject jsonObject){
