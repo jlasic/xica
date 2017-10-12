@@ -56,4 +56,8 @@ public class MainFragment extends Fragment {
     public void setData(MenuData menuData){
         adapter.setData(menuData);
     }
+
+    public void setLoading(boolean isLoading){
+        adapter.setLoading(isLoading);
+    }
 }

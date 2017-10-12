@@ -40,6 +40,9 @@ public class MainPresenter {
     }
 
     public void getCanteenData(final String canteenName){
+        if (listener != null)
+            listener.onLoading(true);
+
         final String endpoint = Utils.getEndpoint(canteenName);
 
         if (endpoint == null)
@@ -75,6 +78,7 @@ public class MainPresenter {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             //TODO: error response
+                            notifyDataChanged(null);
                         }
                     });
             RequestManager.getInstance(mContext).addToRequestQueue(jsObjRequest);
@@ -83,8 +87,10 @@ public class MainPresenter {
 
     private void notifyDataChanged(CanteenData canteenData){
         currentCanteenData = canteenData;
-        if (listener != null)
+        if (listener != null) {
             listener.onResponse(canteenData);
+            listener.onLoading(false);
+        }
     }
 
 }

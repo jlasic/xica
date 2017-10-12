@@ -8,4 +8,5 @@ import com.example.lasic.xica.data.CanteenData;
 
 public interface MainPresenterListener {
     void onResponse(CanteenData canteenData);
+    void onLoading(boolean isLoading);
 }

@@ -65,8 +65,14 @@ public class MainActivity extends AppCompatActivity implements MainPresenterList
 
     @Override
     public void onResponse(CanteenData canteenData) {
-        pagerAdapter.getItem(0).setData(canteenData.getLunchMenu());
-        pagerAdapter.getItem(1).setData(canteenData.getDinnerMenu());
+        pagerAdapter.getItem(0).setData(canteenData != null ? canteenData.getLunchMenu() : null);
+        pagerAdapter.getItem(1).setData(canteenData != null ? canteenData.getDinnerMenu() : null);
+    }
+
+    @Override
+    public void onLoading(boolean isLoading) {
+        pagerAdapter.getItem(0).setLoading(isLoading);
+        pagerAdapter.getItem(1).setLoading(isLoading);
     }
 
     private static class MainPagerAdapter extends FragmentPagerAdapter{
