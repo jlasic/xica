@@ -6,7 +6,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 import com.example.lasic.xica.data.CanteenData;
 import com.example.lasic.xica.helpers.Constants;
 
@@ -20,6 +25,12 @@ public class MainActivity extends AppCompatActivity implements MainPresenterList
 
     @BindView(R.id.viewPager)
     ViewPager viewPager;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.spinner)
+    Spinner spinner;
 
     private MainPresenter presenter;
     private MainPagerAdapter pagerAdapter;
@@ -36,21 +47,20 @@ public class MainActivity extends AppCompatActivity implements MainPresenterList
         pagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
 
-    }
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, Constants.CanteenName.NAME_ARRAY);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                presenter.getCanteenData(Constants.CanteenName.NAME_ARRAY[position]);
+            }
 
-    @OnClick({R.id.kampus, R.id.fesb, R.id.efst})
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.kampus:
-                presenter.getCanteenData(Constants.CanteenName.KAMPUS);
-                break;
-            case R.id.fesb:
-                presenter.getCanteenData(Constants.CanteenName.FESB);
-                break;
-            case R.id.efst:
-                presenter.getCanteenData(Constants.CanteenName.EKONOMIJA);
-                break;
-        }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
